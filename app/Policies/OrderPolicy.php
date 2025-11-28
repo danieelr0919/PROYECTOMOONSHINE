@@ -4,63 +4,38 @@ namespace App\Policies;
 
 use App\Models\Order;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class OrderPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->role == 'admin' || $user->role == 'empleado';
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
     public function view(User $user, Order $order): bool
     {
-        return false;
+        // Cliente solo ve SUS pedidos, admin/empleados ven todos
+        return $user->role == 'admin' || 
+                $user->role == 'empleado' || 
+                ($user->role == 'cliente' && $order->client_id == $user->id);
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
     public function create(User $user): bool
     {
-        return false;
+        // ✅ Clientes también pueden crear pedidos
+        return $user->role == 'admin' || 
+                $user->role == 'empleado' || 
+                $user->role == 'cliente';
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
     public function update(User $user, Order $order): bool
     {
-        return false;
+        // Solo admin/empleados editan pedidos
+        return $user->role == 'admin' || $user->role == 'empleado';
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
     public function delete(User $user, Order $order): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Order $order): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Order $order): bool
-    {
-        return false;
+        return $user->role == 'admin'; // Solo admin borra pedidos
     }
 }

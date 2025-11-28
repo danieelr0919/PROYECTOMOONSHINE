@@ -24,12 +24,10 @@ class ProductPolicy
         return true;
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
+    // Solo los administradores pueden crear productos
     public function create(User $user): bool
     {
-        return true;
+        return $user->role == 'admin';
     }
 
     /**
@@ -37,7 +35,8 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return true;
+        // Solo los administradores pueden actualizar productos
+        return $user->role == 'admin';
     }
 
     /**
@@ -45,7 +44,8 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return true;
+        // Solo los administradores pueden eliminar productos
+        return $user->role == 'admin';
     }
 
     /**

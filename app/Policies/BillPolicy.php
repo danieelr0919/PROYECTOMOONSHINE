@@ -13,7 +13,7 @@ class BillPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->role == 'admin' || $user->role == 'empleado';
     }
 
     /**
@@ -21,7 +21,7 @@ class BillPolicy
      */
     public function view(User $user, Bill $bill): bool
     {
-        return false;
+        return $user->role == 'admin' || $user->role == 'empleado' || $user->role == 'cliente';
     }
 
     /**
@@ -29,7 +29,7 @@ class BillPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role == 'admin' || $user->role == 'empleado';
     }
 
     /**
@@ -37,7 +37,7 @@ class BillPolicy
      */
     public function update(User $user, Bill $bill): bool
     {
-        return false;
+        return $user->role == 'admin' || $user->role == 'empleado';
     }
 
     /**
@@ -45,7 +45,7 @@ class BillPolicy
      */
     public function delete(User $user, Bill $bill): bool
     {
-        return false;
+        return $user->role == 'admin' || $user->role == 'empleado';
     }
 
     /**
