@@ -16,10 +16,10 @@ class UserAdminSeeder extends Seeder
     public function run(): void
     {
         MoonshineUser::updateOrCreate(
-            ['email' => 'admin@gmail.com'],
+            ['email' => 'admin@tuempresa.com'],
             [
                 'name' => 'Admin',
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('password'),
                 'moonshine_user_role_id' => MoonshineUserRole::DEFAULT_ROLE_ID,
             ]
         );
