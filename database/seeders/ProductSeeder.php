@@ -21,28 +21,34 @@ class ProductSeeder extends Seeder
             return;
         }
 
-        Product::create([
-            'name' => 'Pan de la Casa',
-            'description' => 'Especialidad de la panadería',
-            'price' => 100.00,
-            'stock' => 100,
-            'category_id' => 1,
-        ]);
+        Product::updateOrCreate(
+            ['name' => 'Pan de la Casa'],
+            [
+                'description' => 'Especialidad de la panadería',
+                'price' => 100.00,
+                'stock' => 100,
+                'category_id' => 1,
+            ]
+        );
 
-        Product::create([
-            'name' => 'Pastel de Chocolate',
-            'description' => 'Pastel de chocolate artesanal',
-            'price' => 250.00,
-            'stock' => 50,
-            'category_id' => 1,
-        ]);
+        Product::updateOrCreate(
+            ['name' => 'Pastel de Chocolate'],
+            [
+                'description' => 'Pastel de chocolate artesanal',
+                'price' => 250.00,
+                'stock' => 50,
+                'category_id' => 1,
+            ]
+        );
 
-        Product::create([
-            'name' => 'Pan Integral',
-            'description' => 'Pan integral saludable',
-            'price' => 80.00,
-            'stock' => 75,
-            'category_id' => 1,
-        ]);
+        Product::updateOrCreate(
+            ['name' => 'Pan Integral'],
+            [
+                'description' => 'Pan integral saludable',
+                'price' => 80.00,
+                'stock' => 75,
+                'category_id' => 1,
+            ]
+        );
     }
 }
