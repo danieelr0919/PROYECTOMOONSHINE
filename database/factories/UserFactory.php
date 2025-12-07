@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
-use Faker\Generator as Faker;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
@@ -24,11 +24,6 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        // Asegurar que faker esté disponible
-        if (!isset($this->faker)) {
-            $this->faker = \Faker\Factory::create();
-        }
-        
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
