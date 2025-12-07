@@ -15,29 +15,34 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        // Obtener los IDs de las categorias
-        $categoryIds = Category::pluck('id');
-
-        // Verificar si hay categorias disponibles
-        if ($categoryIds->isEmpty()) {
-            echo "No hay categorias disponibles para crear productos.";
+        // Verificar que existe la categoría con ID 1
+        if (!Category::find(1)) {
+            echo "Error: La categoría con ID 1 no existe. Ejecuta CategoriesSeeder primero.";
             return;
         }
 
-        // Crear un producto de ejemplo
         Product::create([
             'name' => 'Pan de la Casa',
-            'description' => 'Especialidad de la panaderia',
+            'description' => 'Especialidad de la panadería',
             'price' => 100.00,
             'stock' => 100,
-            'category_id' => $categoryIds->random(),
+            'category_id' => 1,
         ]);
 
-        // Crear 10 productos aleatorios
-        Product::factory(10)->create([
-            'category_id' => $categoryIds->random(),
+        Product::create([
+            'name' => 'Pastel de Chocolate',
+            'description' => 'Pastel de chocolate artesanal',
+            'price' => 250.00,
+            'stock' => 50,
+            'category_id' => 1,
         ]);
 
+        Product::create([
+            'name' => 'Pan Integral',
+            'description' => 'Pan integral saludable',
+            'price' => 80.00,
+            'stock' => 75,
+            'category_id' => 1,
+        ]);
     }
 }
