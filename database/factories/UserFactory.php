@@ -24,9 +24,19 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        // Usar helper fake() de Laravel o $this->faker si está disponible
+        if (function_exists('fake')) {
+            $faker = fake();
+        } elseif (property_exists($this, 'faker') && $this->faker !== null) {
+            $faker = $this->faker;
+        } else {
+            // Fallback: crear instancia manualmente
+            $faker = \Faker\Factory::create();
+        }
+        
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'name' => $faker->name(),
+            'email' => $faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
